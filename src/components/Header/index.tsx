@@ -3,7 +3,7 @@ import { Box, Text, Title } from '@mantine/core';
 function Header() {
   return (
     <Box>
-      <Title order={2}>Generate a report using GPT-4</Title>
+      <Title order={2}>Generate a CSV report using GPT-4</Title>
       <Box
         style={{
           display: 'flex',
