@@ -12,6 +12,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ag-grid-community/core@npm:~30.2.0":
+  version: 30.2.0
+  resolution: "@ag-grid-community/core@npm:30.2.0"
+  checksum: d0470b09c6efa50f4a76ca969450c80765bc55c2be5b7ac8e2879b453473fd48871a2522192f987b4f108f6b7f4253380a8a31c30c5aeb216b0c89476ecc1a90
+  languageName: node
+  linkType: hard
+
+"@ag-grid-enterprise/core@npm:~30.2.0":
+  version: 30.2.0
+  resolution: "@ag-grid-enterprise/core@npm:30.2.0"
+  dependencies:
+    "@ag-grid-community/core": ~30.2.0
+  checksum: 5ee52e5e2745b8a182f3c48ff4ccac0802deb442098224b4bc2458f5e7dcdf95578a735cb3dcf93e0a7d90bb066e27358877be15e7a64e51e278ddd868a18d50
+  languageName: node
+  linkType: hard
+
+"@ag-grid-enterprise/server-side-row-model@npm:^30.2.0":
+  version: 30.2.0
+  resolution: "@ag-grid-enterprise/server-side-row-model@npm:30.2.0"
+  dependencies:
+    "@ag-grid-community/core": ~30.2.0
+    "@ag-grid-enterprise/core": ~30.2.0
+  checksum: 2cbdb98c1de2f5ae13402e466f4d137687b35bd950d0e685dd8cecd65d40840cb107976bb60025b1af58ca4c726a661ac3ed3bcaf3849746db06c8209d7028eb
+  languageName: node
+  linkType: hard
+
 "@ampproject/remapping@npm:^2.1.0":
   version: 2.2.0
   resolution: "@ampproject/remapping@npm:2.2.0"
@@ -4943,6 +4969,33 @@ __metadata:
     loader-utils: ^2.0.0
     regex-parser: ^2.2.11
   checksum: d524ae23582f41e2275af5d88faab7a9dc09770ed588244e0a76d3196d0d6a90bf02760c71bc6213dbfef3aef4a86232ac9521bfd629752c32b7af37bc74c660
+  languageName: node
+  linkType: hard
+
+"ag-grid-community@npm:^30.2.0":
+  version: 30.2.0
+  resolution: "ag-grid-community@npm:30.2.0"
+  checksum: cdba204e7cbab2503be540310dc212080d11d1b491274a32676afdf4612b6dd9205e55c43eb13cfe5724097c5d50454d225b3071b573fecc939fe29bc161a69a
+  languageName: node
+  linkType: hard
+
+"ag-grid-enterprise@npm:^30.2.0":
+  version: 30.2.0
+  resolution: "ag-grid-enterprise@npm:30.2.0"
+  checksum: d0591815fdb2f49e47ae544d4425211b38845cccc11d8e84478ca824a34fa45caf885c27fd03847db43174e9bfcb95fcfa84ff9a9819853cdc69f352b7a55337
+  languageName: node
+  linkType: hard
+
+"ag-grid-react@npm:^30.2.0":
+  version: 30.2.0
+  resolution: "ag-grid-react@npm:30.2.0"
+  dependencies:
+    prop-types: ^15.8.1
+  peerDependencies:
+    ag-grid-community: ~30.2.0
+    react: ^16.3.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.3.0 || ^17.0.0 || ^18.0.0
+  checksum: bd186c76074affccf306eaa67e95bd6245284b38c45597984059f68968c0ee0fa62fa2177822294863abc5d7b1a12efec155fe58371b2ca8c69724fa769d29df
   languageName: node
   linkType: hard
 
@@ -9986,6 +10039,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mantine-vite-template@workspace:."
   dependencies:
+    "@ag-grid-enterprise/server-side-row-model": ^30.2.0
     "@mantine/core": 7.1.1
     "@mantine/hooks": 7.1.1
     "@storybook/addon-essentials": ^7.0.18
@@ -10006,6 +10060,9 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.59.7
     "@typescript-eslint/parser": ^5.59.7
     "@vitejs/plugin-react": ^4.0.0
+    ag-grid-community: ^30.2.0
+    ag-grid-enterprise: ^30.2.0
+    ag-grid-react: ^30.2.0
     axios: ^1.5.1
     eslint: ^8.41.0
     eslint-config-airbnb: 19.0.4

@@ -4,18 +4,21 @@ import useGenerateQuery from '../../hooks/useGenerateQuery';
 
 function GenerateQuery({
   sessionId,
-  onQueryId,
+  onQueryGenerate,
 }: {
   sessionId: string;
-  onQueryId: (queryId: string) => void;
+  onQueryGenerate: ({ reportId, queryPreview }: { reportId: string; queryPreview: string }) => void;
 }) {
-  const { queryId, generate, isLoading: isGenerating } = useGenerateQuery();
+  const { query, generate, isLoading: isGenerating } = useGenerateQuery();
   const [prompt, setPrompt] = useState('');
-  const isQueryGenerated = !!queryId;
+  const isQueryGenerated = !!query;
 
   useEffect(() => {
-    onQueryId(queryId);
-  }, [queryId]);
+    if (!query) {
+      return;
+    }
+    onQueryGenerate(query);
+  }, [query]);
 
   return (
     <div>
@@ -25,6 +28,7 @@ function GenerateQuery({
           setPrompt(e.target.value);
         }}
         required
+        size="md"
         placeholder="Write your GPT prompt"
         autosize
         minRows={2}
@@ -38,7 +42,7 @@ function GenerateQuery({
           }}
           disabled={!sessionId}
           mt="10"
-          color="green"
+          color="blue"
         >
           {!isGenerating ? (!isQueryGenerated ? 'Generate' : 'Generated') : 'Generating...'}
         </Button>

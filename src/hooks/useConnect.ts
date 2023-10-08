@@ -9,9 +9,9 @@ function useConnect({ onSuccess }: { onSuccess: (sessionId: string) => void }) {
       onError: () => {
         toast.error('Failed to connect');
       },
-      onSuccess: (sessionId) => {
+      onSuccess: ({ customerId }: { customerId: string }) => {
         toast.success('Connected');
-        onSuccess(sessionId);
+        onSuccess(customerId);
       },
     }
   );
@@ -19,7 +19,7 @@ function useConnect({ onSuccess }: { onSuccess: (sessionId: string) => void }) {
   return {
     isLoading,
     error,
-    sessionId: data?.sessionId,
+    sessionId: data?.customerId,
     connect: mutate,
   };
 }

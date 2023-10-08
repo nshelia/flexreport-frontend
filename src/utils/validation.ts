@@ -1,6 +1,7 @@
 export function isValidConnectionString(str: string) {
-  // Regular expression for typical SQL Server connection string format
-  const regex = /^Server=[^;]+;Database=[^;]+;User Id=[^;]+;Password=[^;]+;$/i;
+  // Updated regular expression to match more variations of SQL Server connection string format
+  const regex =
+    /Server=[^;]+;(Initial Catalog|Database)=[^;]+;(User ID|User Id)=[^;]+;Password=[^;]+;/i;
 
   return regex.test(str);
 }

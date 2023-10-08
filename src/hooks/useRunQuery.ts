@@ -1,10 +1,20 @@
 import { useMutation } from 'react-query';
 import { toast } from 'react-hot-toast';
+import { useState } from 'react';
 import api from '../api';
 
-function useRunQuery() {
+function useRunQuery({ customerId, reportId }: { customerId: string; reportId: string }) {
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+
   const { data, error, isLoading, mutate } = useMutation(
-    ({ queryId }: { queryId: string }) => api.runQuery(queryId),
+    () =>
+      api.runQuery({
+        reportId,
+        page,
+        pageSize: limit,
+        customerId,
+      }),
     {
       onError: () => {
         toast.error('Query generation failed');

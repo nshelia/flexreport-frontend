@@ -19,8 +19,7 @@ function useGenerateQuery() {
   return {
     isLoading,
     error,
-    sessionId: data?.sessionId,
-    queryId: data,
+    query: data,
     generate: mutate,
   };
 }
