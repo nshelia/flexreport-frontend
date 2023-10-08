@@ -1,42 +1,32 @@
 import { useRef, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import { IServerSideGetRowsParams } from 'ag-grid-enterprise';
+import { GridApi, IServerSideGetRowsParams } from 'ag-grid-enterprise';
 import { ServerSideRowModelModule } from '@ag-grid-enterprise/server-side-row-model';
 import api from '../../api';
 
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 
-const createServerSideDatasource = ({
-  customerId,
-  reportId,
-  onColumns,
-}: {
-  customerId: string;
-  reportId: string;
-  onColumns: (cols: any) => void;
-}) => ({
+const createServerSideDatasource = ({ customerId, reportId, onColumns }) => ({
   getRows: async (params: IServerSideGetRowsParams) => {
     try {
       const { startRow, endRow } = params.request;
-      if (!startRow || !endRow) {
-        return;
-      }
-      const page = startRow / 5 + 1;
-      const pageSize = 5;
+      const page = startRow / (endRow - startRow) + 1;
+      const pageSize = endRow - startRow;
 
       const response = await api.runQuery({ page, pageSize, customerId, reportId });
       const { headers } = response;
-      const cols = headers.map((header: any) => ({ field: header }));
-      const resultRows = response.data.map((row: any) => {
+      const cols = headers.map((header) => ({ field: header }));
+      const resultRows = response.data.map((row) => {
         const rowObject: { [key: string]: string } = {};
-        row.forEach((cell: any, index: any) => {
+        row.forEach((cell, index) => {
           if (headers[index]) {
             rowObject[headers[index]] = cell;
           }
         });
         return rowObject;
       });
+      console.log(cols);
       onColumns(cols);
       params.success({
         rowData: resultRows,
@@ -54,7 +44,7 @@ export default function TableScrollArea({
   customerId: string;
   reportId: string;
 }) {
-  const gridApiRef = useRef<any>(null);
+  const gridApiRef = useRef<GridApi>(null);
 
   const [columnDefs, setColumnDefs] = useState([
     { field: 'athlete', minWidth: 220 },
@@ -66,17 +56,14 @@ export default function TableScrollArea({
     { field: 'bronze' },
   ]);
 
-  const onGridReady = (params: any) => {
-    if (!gridApiRef.current) {
-      return;
-    }
-
+  const onGridReady = (params) => {
     gridApiRef.current = params;
     const datasource = createServerSideDatasource({
       customerId,
       reportId,
-      onColumns: (cols: any) => setColumnDefs(cols),
+      onColumns: (cols) => setColumnDefs(cols),
     });
+    console.log(datasource);
     // register the datasource with the grid
     params.api.setServerSideDatasource(datasource);
   };
@@ -92,8 +79,7 @@ export default function TableScrollArea({
         pagination
         rowModelType="serverSide"
         modules={[ServerSideRowModelModule]}
-        paginationPageSize={5}
-        cacheBlockSize={5}
+        paginationPageSize={10}
         onGridReady={onGridReady}
       />
     </div>
