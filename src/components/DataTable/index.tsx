@@ -67,10 +67,6 @@ export default function TableScrollArea({
   ]);
 
   const onGridReady = (params: any) => {
-    if (!gridApiRef.current) {
-      return;
-    }
-
     gridApiRef.current = params;
     const datasource = createServerSideDatasource({
       customerId,
